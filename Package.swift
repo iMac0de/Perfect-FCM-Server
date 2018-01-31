@@ -10,7 +10,7 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/PerfectlySoft/Perfect-CURL.git", "3.0.0"..<"4.0.0"),
-		.package(url: "https://github.com/google/auth-library-swift.git", from: "0.3.6")
+		.package(url: "https://github.com/PerfectlySoft/Perfect-OAuth2.git", "3.0.0"..<"4.0.0")
 	],
 	targets: [
 		.target(name: "Perfect-FCM-Server", dependencies: ["PerfectCURL", "OAuth2"]),

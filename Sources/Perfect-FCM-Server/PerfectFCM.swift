@@ -16,8 +16,6 @@ public class PerfectFCM {
     
     static var access: Access?
     
-    public static var token: Token?
-    
     public static var debug = false
     
 	open class Config {
@@ -37,30 +35,36 @@ public class PerfectFCM {
 	
 	public class func prepare() throws -> CURLRequest {
         let scope: [String] = ["https://www.googleapis.com/auth/firebase.messaging"]
-        
-        if let provider = DefaultTokenProvider(scopes: scope) {
-            let sem = DispatchSemaphore(value: 0)
-            
-            try? provider.withToken() { (token, error) -> Void in
-                if let token = token {
-                    self.token = token
-                }
-                if let error = error {
-                    print("ERROR \(error)")
-                }
-                sem.signal()
-            }
-            _ = sem.wait(timeout: DispatchTime.distantFuture)
-            
-            let curlRequest = CURLRequest("https://fcm.googleapis.com/v1/projects/elyot-fc163/messages:send", .failOnError)
-            curlRequest.addHeader(.authorization, value: "Bearer \(self.token?.AccessToken ?? "")")
-            curlRequest.addHeader(.contentType, value: "application/json")
-            
-            return curlRequest
-        } else {
-            print("Unable to obtain an auth token.\nTry pointing GOOGLE_APPLICATION_CREDENTIALS to your service account credentials.")
-            throw Exception.CannotGetAccessToken
-        }
+		
+		GoogleConfig.appid = "111461389955152133646"
+		GoogleConfig.secret = "9875bbdfd84a62b730751a85de8946aff087dfd8"
+		GoogleConfig.endpointAfterAuth = "http://localhost:8181/auth/response/google"
+		GoogleConfig.redirectAfterAuth = "http://localhost:8181/"
+		
+		
+//        if let provider = DefaultTokenProvider(scopes: scope) {
+//            let sem = DispatchSemaphore(value: 0)
+//
+//            try? provider.withToken() { (token, error) -> Void in
+//                if let token = token {
+//                    self.token = token
+//                }
+//                if let error = error {
+//                    print("ERROR \(error)")
+//                }
+//                sem.signal()
+//            }
+//            _ = sem.wait(timeout: DispatchTime.distantFuture)
+//
+//            let curlRequest = CURLRequest("https://fcm.googleapis.com/v1/projects/elyot-fc163/messages:send", .failOnError)
+//            curlRequest.addHeader(.authorization, value: "Bearer \(self.token?.AccessToken ?? "")")
+//            curlRequest.addHeader(.contentType, value: "application/json")
+//
+//            return curlRequest
+//        } else {
+//            print("Unable to obtain an auth token.\nTry pointing GOOGLE_APPLICATION_CREDENTIALS to your service account credentials.")
+//            throw Exception.CannotGetAccessToken
+//        }
 	}
     
     public class func send(topic: String, title: String, body: String, data: [String: String]?) throws {
