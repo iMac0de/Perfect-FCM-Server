@@ -6,8 +6,8 @@ class Perfect_FCM_ServerTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(Perfect_FCM_Server().text, "Hello, World!")
-    }
+		PerfectFCM.prepare()
+	}
 
 
     static var allTests = [
