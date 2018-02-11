@@ -9,11 +9,10 @@ let package = Package(
 		.library(name: "Perfect-FCM-Server", targets: ["Perfect-FCM-Server"])
 	],
 	dependencies: [
-		.package(url: "https://github.com/PerfectlySoft/Perfect-CURL.git", "3.0.0"..<"4.0.0"),
-		.package(url: "https://github.com/PerfectlySoft/Perfect-OAuth2.git", "3.0.0"..<"4.0.0")
+		.package(url: "https://github.com/PerfectlySoft/Perfect-CURL.git", "3.0.0"..<"4.0.0")
 	],
 	targets: [
-		.target(name: "Perfect-FCM-Server", dependencies: ["PerfectCURL", "OAuth2"]),
+		.target(name: "Perfect-FCM-Server", dependencies: ["PerfectCURL"]),
 		.testTarget(name: "Perfect-FCM-ServerTests", dependencies: ["Perfect-FCM-Server"])
 	]
 )
