@@ -58,7 +58,7 @@ open class PerfectFCM {
             let curlResponse = try curlRequest.perform()
 			
 			if debug {
-				NSLog("%@", curlResponse.bodyString)
+				NSLog("%s", curlResponse.bodyString)
 			}
         }
     }
